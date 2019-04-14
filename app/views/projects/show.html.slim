@@ -1,0 +1,20 @@
+h1 プロジェクト詳細
+table
+  tbody
+    tr
+      th = Project.human_attribute_name(:id)
+      td = @project.id
+    tr
+      th = Project.human_attribute_name(:name)
+      td = @project.name
+    tr
+      th = Project.human_attribute_name(:description)
+      td = simple_format(@project.description)
+    tr
+      th = Project.human_attribute_name(:price)
+      td = @project.price
+    tr
+      th = Project.human_attribute_name(:created_at)
+      td = l @project.created_at, format: :long
+
+= link_to '一覧に戻る', projects_path
