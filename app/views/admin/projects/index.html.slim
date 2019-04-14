@@ -1,5 +1,5 @@
-h1 プロジェクト一覧
-= link_to '新規登録', new_project_path
+h1 マイプロジェクト一覧
+= link_to '新規登録', new_admin_project_path
 
 table
   thead
@@ -9,5 +9,5 @@ table
   tbody
     - @projects.each do |project|
       tr
-        td = link_to project.name, project
+        td = link_to project.name, admin_project_path(project)
         td = project.price

@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class Admin::ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[show edit update destroy]
 
@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
     if @project.save
-      redirect_to projects_path, notice: "プロジェクト「#{@project.name}」を作成しました"
+      redirect_to admin_projects_path, notice: "プロジェクト「#{@project.name}」を作成しました"
     else
       render :new
     end
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to @project, notice: "プロジェクト「#{@project.name}」を更新しました"
+      redirect_to admin_project_path(@project), notice: "プロジェクト「#{@project.name}」を更新しました"
     else
       render :edit
     end
@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy!
-    redirect_to projects_path, notice: "プロジェクト「#{@project.name}」を削除しました"
+    redirect_to admin_projects_path, notice: "プロジェクト「#{@project.name}」を削除しました"
   end
 
   private
