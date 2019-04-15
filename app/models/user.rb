@@ -9,9 +9,7 @@ class User < ApplicationRecord
   has_many :investment_projects, through: :investments, source: :project
 
   def owner?(project)
-    return true if self == project.owner
-
-    false
+    self == project.owner
   end
 
   def invest_in?(project)
