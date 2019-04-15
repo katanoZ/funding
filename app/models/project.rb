@@ -18,4 +18,8 @@ class Project < ApplicationRecord
   scope :not_invested_by, ->(user) do
     where.not(id: user.investment_projects)
   end
+
+  def investments_amount
+    investments.sum(:price)
+  end
 end
