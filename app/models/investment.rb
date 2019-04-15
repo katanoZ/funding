@@ -2,7 +2,7 @@ class Investment < ApplicationRecord
   belongs_to :project
   belongs_to :user
 
-  validates :price, numericality: { greater_than: 0 }
+  validates :price, numericality: { greater_than: 0, only_integer: true }
   validates :project, uniqueness: { scope: :user, message: 'に投資済みです' }
   validate :user_cannot_be_owner
 

@@ -1,6 +1,6 @@
 = form_with model: [project, investment], local:true do |f|
   = f.label :price
   br
-  = f.text_field :price
+  = f.number_field :price, min: 1
   br
   = f.submit nil

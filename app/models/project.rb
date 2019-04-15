@@ -5,7 +5,7 @@ class Project < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: true
-  validates :price, numericality: { greater_than: 0 }
+  validates :price, numericality: { greater_than: 0, only_integer: true }
 
   scope :investable, ->(user) do
     not_owned_by(user).not_invested_by(user)
