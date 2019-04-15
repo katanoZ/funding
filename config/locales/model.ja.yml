@@ -1,0 +1,16 @@
+---
+ja:
+  activerecord:
+    models:
+      project: プロジェクト
+    attributes:
+      project:
+        id: ID
+        name: 名前
+        description: 説明
+        price: 目標金額
+
+  # 全モデル共通
+  attributes:
+    created_at: 作成日時
+    updated_at: 更新日時
