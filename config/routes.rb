@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: 'projects#index'
-  resources :projects
+  root 'projects#index'
+  resources :projects, only: %i[index show]
+
+  # マイプロジェクト画面
+  namespace :admin do
+    root 'projects#index'
+    resources :projects
+  end
 end
