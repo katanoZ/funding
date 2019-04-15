@@ -7,4 +7,19 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :investments, dependent: :destroy
   has_many :investment_projects, through: :investments, source: :project
+
+  def owner?(project)
+    return true if self == project.owner
+
+    false
+  end
+
+  def invest_in?(project)
+    investments.exists?(project: project)
+  end
+
+  def investment_amount(project)
+    investment = investments.find_by(project: project)
+    investment&.price
+  end
 end

@@ -6,4 +6,16 @@ class Project < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :price, numericality: { greater_than: 0 }
+
+  scope :investable, ->(user) do
+    not_owned_by(user).not_invested_by(user)
+  end
+
+  scope :not_owned_by, ->(user) do
+    where.not(owner: user)
+  end
+
+  scope :not_invested_by, ->(user) do
+    where.not(id: user.investment_projects)
+  end
 end

@@ -1,0 +1,6 @@
+- if current_user.owner?(project)
+  p あなたはこのプロジェクトのオーナーです
+- elsif current_user.invest_in?(project)
+  p = "#{current_user.investment_amount(project).to_s(:currency)} 投資済みです"
+- else
+  p = link_to 'このプロジェクトに投資する', new_project_investment_path(project)

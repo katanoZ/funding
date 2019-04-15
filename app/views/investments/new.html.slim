@@ -1,4 +1,10 @@
-h1 プロジェクト詳細
+h1 プロジェクトに投資する
+
+- if @investment.errors.present?
+  ul
+    - @investment.errors.full_messages.each do |message|
+      li = message
+
 table
   tbody
     tr
@@ -13,10 +19,7 @@ table
     tr
       th = Project.human_attribute_name(:price)
       td = @project.price
-    tr
-      th = Project.human_attribute_name(:created_at)
-      td = l @project.created_at, format: :long
 
-= link_to '一覧に戻る', projects_path
-br
-= render 'investment_link', project: @project
+= render 'form', project: @project, investment: @investment
+
+= link_to 'プロジェクトに戻る', project_path(@project)

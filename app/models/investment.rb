@@ -9,6 +9,6 @@ class Investment < ApplicationRecord
   private
 
   def user_cannot_be_owner
-    errors.add(:project, 'のオーナーは投資できません') if user == project.owner
+    errors.add(:project, 'のオーナーは投資できません') if user.owner?(project)
   end
 end

@@ -9,6 +9,8 @@ ja:
         name: 名前
         description: 説明
         price: 目標金額
+      investment:
+        price: 投資金額
 
   # 全モデル共通
   attributes:
