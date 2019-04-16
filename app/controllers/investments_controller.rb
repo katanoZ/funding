@@ -3,8 +3,7 @@ class InvestmentsController < ApplicationController
   before_action :set_project
 
   def new
-    @investment = @project.investments.build
-    @investment.user = current_user
+    @investment = @project.investments.build(user: current_user)
   end
 
   def create

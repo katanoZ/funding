@@ -4,11 +4,11 @@ class Investment < ApplicationRecord
 
   validates :price, numericality: { greater_than: 0, only_integer: true }
   validates :project, uniqueness: { scope: :user, message: 'に投資済みです' }
-  validate :user_cannot_be_owner
+  validate :verify_owner
 
   private
 
-  def user_cannot_be_owner
+  def verify_owner
     errors.add(:project, 'のオーナーは投資できません') if user.owner?(project)
   end
 end

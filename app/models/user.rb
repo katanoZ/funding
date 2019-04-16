@@ -17,7 +17,9 @@ class User < ApplicationRecord
   end
 
   def investment_amount(project)
+    return 0 unless invest_in?(project)
+
     investment = investments.find_by(project: project)
-    investment&.price
+    investment.price
   end
 end
