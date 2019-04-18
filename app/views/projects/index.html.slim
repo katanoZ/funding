@@ -6,6 +6,7 @@ table
       th = Project.human_attribute_name(:name)
       th = Project.human_attribute_name(:price)
       th = Project.human_attribute_name(:investments_amount)
+      th
 
   tbody
     - @projects.each do |project|
@@ -13,3 +14,4 @@ table
         td = link_to project.name, project_path(project)
         td = project.price.to_s(:currency)
         td = project.investments_amount.to_s(:currency)
+        td = render 'like_form', project: project

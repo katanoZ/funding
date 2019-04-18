@@ -24,4 +24,18 @@ class User < ApplicationRecord
     investment = investments.find_by(project: project)
     investment.price
   end
+
+  def like!(project)
+    likes.create!(project: project)
+  end
+
+  def undo_like!(project)
+    raise 'プロジェクトにいいねしていません' unless likes.exists?(project: project)
+
+    likes.find_by(project: project).destroy!
+  end
+
+  def like?(project)
+    likes.exists?(project: project)
+  end
 end
