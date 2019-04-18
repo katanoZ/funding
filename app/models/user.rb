@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :investments, dependent: :destroy
   has_many :investment_projects, through: :investments, source: :project
+  has_many :likes, dependent: :destroy
+  has_many :liked_projects, through: :likes, source: :project
 
   def owner?(project)
     self == project.owner
