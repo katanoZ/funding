@@ -4,5 +4,22 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :projects
+  has_many :projects, dependent: :destroy
+  has_many :investments, dependent: :destroy
+  has_many :investment_projects, through: :investments, source: :project
+
+  def owner?(project)
+    self == project.owner
+  end
+
+  def invest_in?(project)
+    investments.exists?(project: project)
+  end
+
+  def investment_amount(project)
+    return 0 unless invest_in?(project)
+
+    investment = investments.find_by(project: project)
+    investment.price
+  end
 end

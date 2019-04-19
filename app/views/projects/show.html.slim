@@ -12,9 +12,14 @@ table
       td = simple_format(@project.description)
     tr
       th = Project.human_attribute_name(:price)
-      td = @project.price
+      td = @project.price.to_s(:currency)
+    tr
+      th = Project.human_attribute_name(:investments_amount)
+      td = @project.investments_amount.to_s(:currency)
     tr
       th = Project.human_attribute_name(:created_at)
       td = l @project.created_at, format: :long
 
 = link_to '一覧に戻る', projects_path
+br
+= render 'investment_link', project: @project

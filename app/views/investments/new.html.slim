@@ -1,0 +1,25 @@
+h1 プロジェクトに投資する
+
+- if @investment.errors.present?
+  ul
+    - @investment.errors.full_messages.each do |message|
+      li = message
+
+table
+  tbody
+    tr
+      th = Project.human_attribute_name(:id)
+      td = @project.id
+    tr
+      th = Project.human_attribute_name(:name)
+      td = @project.name
+    tr
+      th = Project.human_attribute_name(:description)
+      td = simple_format(@project.description)
+    tr
+      th = Project.human_attribute_name(:price)
+      td = @project.price
+
+= render 'form', project: @project, investment: @investment
+
+= link_to 'プロジェクトに戻る', project_path(@project)
