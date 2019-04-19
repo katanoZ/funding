@@ -134,8 +134,8 @@ RSpec.describe User, type: :model do
 
     context 'ユーザがプロジェクトに「いいね」をしていない場合' do
       before do
-        guest = create(:user)
-        guest.like!(project)
+        other_user = create(:user)
+        other_user.like!(project)
 
         other_project = create(:project)
         user.like!(other_project)

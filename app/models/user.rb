@@ -30,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def undo_like!(project)
-    raise 'プロジェクトにいいねしていません' unless likes.exists?(project: project)
+    raise 'プロジェクトにいいねしていません' unless like?(project)
 
     likes.find_by(project: project).destroy!
   end
