@@ -1,9 +1,10 @@
 - unless current_user.owner?(project)
   - if current_user.liked?(project)
-    = form_with model: project.likes.find_by(user: current_user), local:true, method: :delete do |f|
-      = f.submit '「いいね」を取り消す'
+    p = link_to '「いいね」を取り消す',
+          like_path(project.likes.find_by(user: current_user)),
+          method: :delete
 
   - else
-    = form_with model: project.likes.build, local:true do |f|
-      = f.hidden_field :project_id
-      = f.submit '「いいね」をする'
+    p = link_to '「いいね」をする',
+          likes_path(project_id: project.id),
+          method: :post
