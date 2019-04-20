@@ -9,7 +9,7 @@ class LikesController < ApplicationController
 
   def destroy
     project = Like.find(params[:id]).project
-    current_user.undo_like!(project)
+    current_user.remove_like!(project)
     redirect_back(fallback_location: projects_path)
   end
 end

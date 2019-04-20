@@ -29,13 +29,13 @@ class User < ApplicationRecord
     likes.create!(project: project)
   end
 
-  def undo_like!(project)
-    raise 'プロジェクトにいいねしていません' unless like?(project)
+  def remove_like!(project)
+    raise 'プロジェクトにいいねしていません' unless liked?(project)
 
     likes.find_by(project: project).destroy!
   end
 
-  def like?(project)
+  def liked?(project)
     likes.exists?(project: project)
   end
 end

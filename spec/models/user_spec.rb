@@ -79,7 +79,7 @@ RSpec.describe User, type: :model do
       let(:project) { create(:project) }
 
       it '結果が正しいこと' do
-        expect { user.like!(project) }.to change { user.like?(project) }
+        expect { user.like!(project) }.to change { user.liked?(project) }
           .from(false).to(true)
       end
     end
@@ -102,28 +102,28 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#undo_like!' do
+  describe '#remove_like!' do
     let(:project) { create(:project) }
 
     context 'ユーザがプロジェクトに「いいね」をしている場合' do
       before { user.like!(project) }
 
       it '結果が正しいこと' do
-        expect { user.undo_like!(project) }.to change { user.like?(project) }
+        expect { user.remove_like!(project) }.to change { user.liked?(project) }
           .from(true).to(false)
       end
     end
 
     context 'ユーザがプロジェクトに「いいね」をしていない場合' do
       it 'エラーが発生すること' do
-        expect { user.undo_like!(project) }.to raise_error 'プロジェクトにいいねしていません'
+        expect { user.remove_like!(project) }.to raise_error 'プロジェクトにいいねしていません'
       end
     end
   end
 
-  describe 'like?' do
+  describe 'liked?' do
     let(:project) { create(:project) }
-    subject { user.like?(project) }
+    subject { user.liked?(project) }
 
     context 'ユーザがプロジェクトに「いいね」をしている場合' do
       before { user.like!(project) }

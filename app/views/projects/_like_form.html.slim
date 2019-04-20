@@ -1,5 +1,5 @@
 - unless current_user.owner?(project)
-  - if current_user.like?(project)
+  - if current_user.liked?(project)
     = form_with model: project.likes.find_by(user: current_user), local:true, method: :delete do |f|
       = f.submit '「いいね」を取り消す'
 
