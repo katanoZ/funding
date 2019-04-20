@@ -14,4 +14,4 @@ table
         td = link_to project.name, project_path(project)
         td = project.price.to_s(:currency)
         td = project.investments_amount.to_s(:currency)
-        td = render 'like_form', project: project
+        td = render 'like_link', project: project
