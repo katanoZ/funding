@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
         is_expected.to be true
       end
     end
+
     context 'ユーザがプロジェクトのオーナーでない場合' do
       let(:project) { create(:project) }
 
@@ -142,7 +143,7 @@ RSpec.describe User, type: :model do
       end
 
       it '結果が正しいこと' do
-        is_expected.to eq false
+        is_expected.to be false
       end
     end
   end
