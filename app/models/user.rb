@@ -25,14 +25,14 @@ class User < ApplicationRecord
     investment.price
   end
 
-  def like!(project)
-    likes.create!(project: project)
+  def like(project)
+    likes.build(project: project).save
   end
 
-  def remove_like!(project)
-    raise 'プロジェクトにいいねしていません' unless liked?(project)
+  def remove_like(project)
+    return false unless liked?(project)
 
-    likes.find_by(project: project).destroy!
+    likes.find_by(project: project).destroy
   end
 
   def liked?(project)
