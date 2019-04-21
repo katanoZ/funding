@@ -6,5 +6,5 @@
 
   - else
     p = link_to '「いいね」をする',
-          likes_path(project_id: project.id),
+          project_likes_path(project),
           method: :post

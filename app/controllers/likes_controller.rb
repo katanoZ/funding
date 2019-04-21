@@ -3,13 +3,19 @@ class LikesController < ApplicationController
 
   def create
     project = Project.find(params[:project_id])
-    current_user.like!(project)
-    redirect_back(fallback_location: projects_path)
+    if current_user.like(project)
+      redirect_back(fallback_location: projects_path)
+    else
+      redirect_to projects_path, alert: '処理に失敗しました'
+    end
   end
 
   def destroy
     project = Like.find(params[:id]).project
-    current_user.remove_like!(project)
-    redirect_back(fallback_location: projects_path)
+    if current_user.remove_like(project)
+      redirect_back(fallback_location: projects_path)
+    else
+      redirect_to projects_path, alert: '処理に失敗しました'
+    end
   end
 end
