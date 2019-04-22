@@ -10,14 +10,15 @@ RSpec.describe User, type: :model do
       let(:project) { create(:project, owner: user) }
 
       it '結果が正しいこと' do
-        is_expected.to be true
+        is_expected.to be_truthy
       end
     end
+
     context 'ユーザがプロジェクトのオーナーでない場合' do
       let(:project) { create(:project) }
 
       it '結果が正しいこと' do
-        is_expected.to be false
+        is_expected.to be_falsey
       end
     end
   end
@@ -32,7 +33,7 @@ RSpec.describe User, type: :model do
       end
 
       it '結果が正しいこと' do
-        is_expected.to be true
+        is_expected.to be_truthy
       end
     end
 
@@ -42,7 +43,7 @@ RSpec.describe User, type: :model do
       end
 
       it '結果が正しいこと' do
-        is_expected.to be false
+        is_expected.to be_falsey
       end
     end
   end
@@ -69,6 +70,104 @@ RSpec.describe User, type: :model do
 
       it '出資額が正しいこと' do
         is_expected.to eq 0
+      end
+    end
+  end
+
+  describe '#like' do
+    context 'ユーザがプロジェクトに「いいね」をしていない場合' do
+      let!(:project) { create(:project) }
+      let!(:result) { user.like(project) }
+
+      it '結果が正しいこと' do
+        expect(result).to be_truthy
+      end
+
+      it '内容が正しいこと' do
+        expect(user.liked?(project)).to be_truthy
+      end
+    end
+
+    context 'ユーザがプロジェクトに「いいね」をしている場合' do
+      before { user.like(project) }
+      let(:project) { create(:project) }
+      let!(:result) { user.like(project) }
+
+      it '結果が正しいこと' do
+        expect(result).to be_falsey
+      end
+
+      it '内容が正しいこと' do
+        expect(user.liked?(project)).to be_truthy
+      end
+    end
+
+    context 'ユーザがプロジェクトのオーナーの場合' do
+      let!(:project) { create(:project, owner: user) }
+      let!(:result) { user.like(project) }
+
+      it '結果が正しいこと' do
+        expect(result).to be_falsey
+      end
+
+      it '内容が正しいこと' do
+        expect(user.liked?(project)).to be_falsey
+      end
+    end
+  end
+
+  describe '#remove_like' do
+    context 'ユーザがプロジェクトに「いいね」をしている場合' do
+      before { user.like(project) }
+      let(:project) { create(:project) }
+      let!(:result) { user.remove_like(project) }
+
+      it '結果が正しいこと' do
+        expect(result).to be_truthy
+      end
+
+      it '内容が正しいこと' do
+        expect(user.liked?(project)).to be_falsey
+      end
+    end
+
+    context 'ユーザがプロジェクトに「いいね」をしていない場合' do
+      let!(:project) { create(:project) }
+      let!(:result) { user.remove_like(project) }
+
+      it '結果が正しいこと' do
+        expect(result).to be_falsey
+      end
+
+      it '内容が正しいこと' do
+        expect(user.liked?(project)).to be_falsey
+      end
+    end
+  end
+
+  describe 'liked?' do
+    let(:project) { create(:project) }
+    subject { user.liked?(project) }
+
+    context 'ユーザがプロジェクトに「いいね」をしている場合' do
+      before { user.like(project) }
+
+      it '結果が正しいこと' do
+        is_expected.to be_truthy
+      end
+    end
+
+    context 'ユーザがプロジェクトに「いいね」をしていない場合' do
+      before do
+        other_user = create(:user)
+        other_user.like(project)
+
+        other_project = create(:project)
+        user.like(other_project)
+      end
+
+      it '結果が正しいこと' do
+        is_expected.to be_falsey
       end
     end
   end

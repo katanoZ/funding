@@ -1,0 +1,10 @@
+- unless current_user.owner?(project)
+  - if current_user.liked?(project)
+    p = link_to '「いいね」を取り消す',
+          like_path(project.likes.find_by(user: current_user)),
+          method: :delete
+
+  - else
+    p = link_to '「いいね」をする',
+          project_likes_path(project),
+          method: :post

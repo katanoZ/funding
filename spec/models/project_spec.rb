@@ -55,6 +55,7 @@ RSpec.describe Project, type: :model do
       context '該当のデータが存在しない場合' do
         let!(:project) { create(:project, owner: user) }
         let!(:results) { Project.not_owned_by(user) }
+
         it '件数が正しいこと' do
           expect(results.count).to eq 0
         end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'projects#index'
   resources :projects, only: %i[index show] do
     resources :investments, only: %i[new create]
+    resources :likes, only: %i[create destroy], shallow: true
   end
 
   # マイプロジェクト画面

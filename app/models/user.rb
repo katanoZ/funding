@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :investments, dependent: :destroy
   has_many :investment_projects, through: :investments, source: :project
+  has_many :likes, dependent: :destroy
+  has_many :liked_projects, through: :likes, source: :project
 
   def owner?(project)
     self == project.owner
@@ -21,5 +23,19 @@ class User < ApplicationRecord
 
     investment = investments.find_by(project: project)
     investment.price
+  end
+
+  def like(project)
+    likes.build(project: project).save
+  end
+
+  def remove_like(project)
+    return false unless liked?(project)
+
+    likes.find_by(project: project).destroy
+  end
+
+  def liked?(project)
+    likes.exists?(project: project)
   end
 end
