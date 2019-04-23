@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :administer do
-    get 'investments/index'
-  end
   devise_for :users
 
   root 'projects#index'
