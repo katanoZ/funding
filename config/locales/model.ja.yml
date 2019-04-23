@@ -6,7 +6,7 @@ ja:
     attributes:
       project:
         id: ID
-        name: 名前
+        name: プロジェクト名
         description: 説明
         price: 目標金額
         investments_amount: 投資金額合計

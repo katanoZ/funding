@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_projects, through: :likes, source: :project
 
+  enum role: { default: 0, administrator: 1 }
+
   def owner?(project)
     self == project.owner
   end

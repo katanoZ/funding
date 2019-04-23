@@ -1,0 +1,16 @@
+h1 全ユーザーの投資一覧
+
+table
+  thead
+    tr
+      th = User.human_attribute_name(:email)
+      th = Project.human_attribute_name(:name)
+      th = Investment.human_attribute_name(:price)
+      th = Investment.human_attribute_name(:created_at)
+  tbody
+    - @investments.each do |investment|
+      tr
+        td = investment.user.email
+        td = investment.project.name
+        td = investment.price.to_s(:currency)
+        td = l investment.created_at, format: :long
