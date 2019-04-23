@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   namespace :administrator do
     root 'investments#index'
     resources :investments, only: %i[index]
+    resources :categories
   end
 end
