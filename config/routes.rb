@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :projects
   end
 
-  # 運営管理車画面
+  # 運営管理者画面
   namespace :administrator do
     root 'investments#index'
     resources :investments, only: %i[index]
