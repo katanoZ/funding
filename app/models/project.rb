@@ -4,6 +4,8 @@ class Project < ApplicationRecord
   has_many :investors, through: :investments, source: :user
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
+  has_many :categorizations, dependent: :destroy
+  has_many :categories, through: :categorizations
 
   validates :name, presence: true
   validates :name, uniqueness: true

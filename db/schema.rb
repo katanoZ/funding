@@ -10,15 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_063035) do
+ActiveRecord::Schema.define(version: 2019_04_24_222607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_assignments_on_category_id"
+    t.index ["project_id", "category_id"], name: "index_assignments_on_project_id_and_category_id", unique: true
+    t.index ["project_id"], name: "index_assignments_on_project_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categorizations", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_categorizations_on_category_id"
+    t.index ["project_id", "category_id"], name: "index_categorizations_on_project_id_and_category_id", unique: true
+    t.index ["project_id"], name: "index_categorizations_on_project_id"
   end
 
   create_table "investments", force: :cascade do |t|
@@ -66,6 +86,10 @@ ActiveRecord::Schema.define(version: 2019_04_23_063035) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "assignments", "categories"
+  add_foreign_key "assignments", "projects"
+  add_foreign_key "categorizations", "categories"
+  add_foreign_key "categorizations", "projects"
   add_foreign_key "investments", "projects"
   add_foreign_key "investments", "users"
   add_foreign_key "likes", "projects"
