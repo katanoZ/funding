@@ -1,0 +1,11 @@
+h1 カテゴリ一覧
+= link_to '新規登録', new_administrator_category_path
+
+table
+  thead
+    tr
+      th = Category.human_attribute_name(:name)
+  tbody
+    - @categories.each do |category|
+      tr
+        td = link_to category.name, administrator_category_path(category)

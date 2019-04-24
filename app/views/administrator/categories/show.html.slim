@@ -1,0 +1,19 @@
+h1 カテゴリ詳細
+table
+  tbody
+    tr
+      th =  Category.human_attribute_name(:id)
+      td = @category.id
+    tr
+      th = Category.human_attribute_name(:name)
+      td = @category.name
+    tr
+      th = Category.human_attribute_name(:created_at)
+      td = l @category.created_at, format: :long
+
+= link_to '編集する', edit_administrator_category_path
+br
+= link_to '削除', administrator_category_path(@category), method: :delete, remote: true,
+    data: { confirm: "カテゴリ「#{@category.name}」を削除します。よろしいですか？" }
+br
+= link_to '一覧に戻る', administrator_categories_path
