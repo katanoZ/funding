@@ -7,6 +7,8 @@ class Project < ApplicationRecord
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
 
+  accepts_nested_attributes_for :categorizations, allow_destroy: true
+
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :price, numericality: { greater_than: 0, only_integer: true }

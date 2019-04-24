@@ -19,6 +19,9 @@ table
     tr
       th = Project.human_attribute_name(:created_at)
       td = l @project.created_at, format: :long
+    tr
+      th = Category.model_name.human
+      td = @project.categories.map(&:name).join(' ')
 
 = link_to '編集する', edit_admin_project_path
 br

@@ -3,6 +3,7 @@ ja:
   activerecord:
     models:
       project: プロジェクト
+      category: カテゴリ
     attributes:
       project:
         name: プロジェクト名
@@ -13,6 +14,8 @@ ja:
         price: 投資金額
       category:
         name: カテゴリ名
+      categorization:
+        category_id: カテゴリ
 
   # 全モデル共通
   attributes:
