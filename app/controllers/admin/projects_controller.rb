@@ -11,7 +11,7 @@ class Admin::ProjectsController < ApplicationController
 
   def new
     @project = current_user.projects.build
-    @project.categorizations.build
+    @project.project_categories.build
   end
 
   def create
@@ -43,7 +43,7 @@ class Admin::ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(
-      :name, :description, :price, categorizations_attributes: [:id, :category_id]
+      :name, :description, :price, project_categories_attributes: [:id, :category_id]
     )
   end
 

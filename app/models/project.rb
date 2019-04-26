@@ -4,10 +4,10 @@ class Project < ApplicationRecord
   has_many :investors, through: :investments, source: :user
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
-  has_many :categorizations, dependent: :destroy
-  has_many :categories, through: :categorizations
+  has_many :project_categories, dependent: :destroy
+  has_many :categories, through: :project_categories
 
-  accepts_nested_attributes_for :categorizations, allow_destroy: true
+  accepts_nested_attributes_for :project_categories, allow_destroy: true
 
   validates :name, presence: true
   validates :name, uniqueness: true

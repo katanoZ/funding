@@ -14,7 +14,7 @@ ja:
         price: 投資金額
       category:
         name: カテゴリ名
-      categorization:
+      project_category:
         category_id: カテゴリ
 
   # 全モデル共通
