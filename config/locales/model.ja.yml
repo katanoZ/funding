@@ -16,6 +16,8 @@ ja:
         name: カテゴリ名
       project_category:
         category_id: カテゴリ
+      project/project_categories:
+        category: カテゴリ
 
   # 全モデル共通
   attributes:
