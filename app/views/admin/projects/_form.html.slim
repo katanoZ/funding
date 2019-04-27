@@ -15,7 +15,7 @@
   br
   = f.fields_for :project_categories do |c|
     = c.label :category_id
-    = c.collection_select :category_id, Category.all, :id, :name, include_blank: true
+    = c.collection_select :category_id, Category.all, :id, :name, prompt: '選択してください'
     br
   br
   = f.submit nil
