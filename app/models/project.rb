@@ -7,12 +7,11 @@ class Project < ApplicationRecord
   has_many :project_categories, dependent: :destroy
   has_many :categories, through: :project_categories
 
-  accepts_nested_attributes_for :project_categories
+  accepts_nested_attributes_for :project_categories, allow_destroy: true
 
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :price, numericality: { greater_than: 0, only_integer: true }
-  validate :verify_cateogry_ids, if: :category_id_entered?
 
   scope :investable, ->(user) do
     not_owned_by(user).not_invested_by(user)
@@ -28,24 +27,5 @@ class Project < ApplicationRecord
 
   def investments_amount
     investments.sum(:price)
-  end
-
-  def category_id_entered?
-    category_ids.any?
-  end
-
-  def verify_cateogry_ids
-    return true if category_ids_uniq?
-
-    errors.add(:base, '同じカテゴリは選択できません')
-    false
-  end
-
-  def category_ids
-    project_categories.map(&:category_id)
-  end
-
-  def category_ids_uniq?
-    (category_ids.size - category_ids.uniq.size).zero?
   end
 end

@@ -11,7 +11,6 @@ class Admin::ProjectsController < ApplicationController
 
   def new
     @project = current_user.projects.build
-    ProjectCategory::NUMBER_OF_CATEGORIES.times { @project.project_categories.build }
   end
 
   def create
@@ -42,9 +41,7 @@ class Admin::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(
-      :name, :description, :price, project_categories_attributes: [:id, :category_id]
-    )
+    params.require(:project).permit(:name, :description, :price, category_ids: [])
   end
 
   def set_project
