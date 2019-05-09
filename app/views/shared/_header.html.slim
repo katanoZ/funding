@@ -1,8 +1,13 @@
 ul
   - if user_signed_in?
     li = link_to 'ログアウト', destroy_user_session_path, method: :delete
-    li = link_to 'マイプロジェクト', admin_projects_path
+
     li = link_to '全てのプロジェクト', projects_path
+    li = link_to 'マイプロジェクト', admin_projects_path
+
+    - if current_user.projects.present?
+      li = link_to '投資状況レポート', admin_investments_report_path
+
     - if current_user.administrator?
       li = link_to '投資一覧', administrator_investments_path
       li = link_to 'カテゴリ一覧', administrator_categories_path

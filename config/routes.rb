@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'projects#index'
     resources :projects
+    get 'investments/report', to: 'investments#report'
   end
 
   # 運営管理者画面
