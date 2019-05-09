@@ -5,6 +5,8 @@ ja:
       project: プロジェクト
       category: カテゴリ
     attributes:
+      user:
+        name: 名前
       project:
         name: プロジェクト名
         description: 説明

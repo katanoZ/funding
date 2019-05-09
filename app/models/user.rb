@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   enum role: { default: 0, administrator: 1 }
 
+  validates :name, presence: true
+
   def owner?(project)
     self == project.owner
   end
