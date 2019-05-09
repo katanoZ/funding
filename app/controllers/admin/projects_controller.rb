@@ -41,7 +41,7 @@ class Admin::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :description, :price)
+    params.require(:project).permit(:name, :description, :price, category_ids: [])
   end
 
   def set_project

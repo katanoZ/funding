@@ -13,6 +13,8 @@
   = f.label :price
   = f.number_field :price, min: 1
   br
+  = f.collection_check_boxes :category_ids, Category.all, :id, :name
+  br
   = f.submit nil
   
 = link_to '一覧に戻る', admin_projects_path
