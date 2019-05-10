@@ -1,2 +1,22 @@
-h1 Admin::Investments#report
-p Find me in app/views/admin/investments/report.html.slim
+h1 投資状況レポート
+p 自分が作成したプロジェクトの投資状況を一覧で表示します
+
+= render 'form', report_form: @report_form
+
+table
+  thead
+    tr
+      th = Project.human_attribute_name(:name)
+      th = User.human_attribute_name(:name)
+      th = Investment.human_attribute_name(:price)
+      th = Investment.human_attribute_name(:created_at)
+
+  - unless @investments.nil?
+    tbody
+      - @investments.each do |investment|
+        tr
+          td = investment.project.name
+          td = investment.user.name
+          td = investment.price.to_s(:currency)
+          td = l investment.created_at, format: :long
+

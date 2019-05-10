@@ -6,6 +6,14 @@ class Investment < ApplicationRecord
   validates :project, uniqueness: { scope: :user, message: 'に投資済みです' }
   validate :verify_owner
 
+  scope :for_projects_created_by, ->(user) do
+    where(project: user.projects)
+  end
+
+  scope :created_within, ->(range) do
+    where(created_at: range)
+  end
+
   private
 
   def verify_owner
