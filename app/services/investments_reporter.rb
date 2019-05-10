@@ -8,7 +8,7 @@ class InvestmentsReporter
     Investment.for_projects_created_by(user)
               .created_within(range)
               .includes(:project, :user)
-              .order(:project_id, :user_id, :created_at)
+              .order(:project_id, :user_id)
   end
 
   private
