@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     root 'projects#index'
     resources :projects
     get 'investments/report', to: 'investments#report'
-    get 'investments/report_result', to: 'investments#report_result'
+    get 'investments/generate_report', to: 'investments#generate_report'
   end
 
   # 運営管理者画面

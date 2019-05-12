@@ -1,7 +1,7 @@
 h1 投資状況レポート
 p 自分が作成したプロジェクトの投資状況を一覧で表示します
 
-= render 'form', report_form: @report_form
+= render 'form', form: @reporter.form
 
 table
   thead
@@ -11,7 +11,7 @@ table
       th = Investment.human_attribute_name(:price)
       th = Investment.human_attribute_name(:created_at)
 
-  - unless @investments.nil?
+  - if @investments.present?
     tbody
       - @investments.each do |investment|
         tr

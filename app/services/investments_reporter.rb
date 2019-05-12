@@ -1,6 +1,9 @@
 class InvestmentsReporter
-  def initialize(form, user)
-    @form = form
+  delegate :valid?, to: :@form
+  attr_reader :form
+
+  def initialize(params = nil, user = nil)
+    @form = InvestmentsReportForm.new(params)
     @user = user
   end
 
@@ -13,7 +16,7 @@ class InvestmentsReporter
 
   private
 
-  attr_reader :form, :user
+  attr_reader :user
 
   def range
     (form.start_date.beginning_of_day)..(form.end_date.end_of_day)
