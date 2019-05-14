@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :projects
     get 'investments/report', to: 'investments#report'
     get 'investments/generate_report', to: 'investments#generate_report'
+    get 'investments/generate_csv_report', to: 'investments#generate_csv_report'
   end
 
   # 運営管理者画面

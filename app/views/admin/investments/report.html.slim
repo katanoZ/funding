@@ -20,3 +20,6 @@ table
           td = investment.price.to_s(:currency)
           td = l investment.created_at, format: :long
 
+- if @investments.present?
+  = link_to 'CSV出力', admin_investments_generate_csv_report_path(report: @reporter.params, format: :csv)
+

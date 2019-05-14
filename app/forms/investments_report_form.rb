@@ -10,6 +10,14 @@ class InvestmentsReportForm
 
   validate :verify_range
 
+  def range
+    (start_date.beginning_of_day)..(end_date.end_of_day)
+  end
+
+  def params
+    { start_date: start_date, end_date: end_date }
+  end
+
   private
 
   def verify_range

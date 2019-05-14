@@ -1,14 +1,18 @@
 class Admin::InvestmentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_reporter, only: %i[generate_report generate_csv_report]
 
   def report
     @reporter = InvestmentsReporter.new
   end
 
   def generate_report
-    @reporter = InvestmentsReporter.new(report_params, current_user)
-    @investments = @reporter.execute if @reporter.valid?
+    @investments = @reporter.search if @reporter.valid?
     render :report
+  end
+
+  def generate_csv_report
+    send_data @reporter.generate_csv, filename: @reporter.filename
   end
 
   private
@@ -16,4 +20,9 @@ class Admin::InvestmentsController < ApplicationController
   def report_params
     params.require(:report).permit(:start_date, :end_date)
   end
+
+  def set_reporter
+    @reporter = InvestmentsReporter.new(report_params, current_user)
+  end
 end
+
