@@ -12,7 +12,7 @@ class Admin::InvestmentsController < ApplicationController
   end
 
   def generate_csv_report
-    send_data @reporter.generate_csv, filename: @reporter.filename
+    send_data @reporter.export_csv, filename: @reporter.filename
   end
 
   private

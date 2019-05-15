@@ -20,15 +20,14 @@ class InvestmentsReporter
               .order(:project_id, :user_id)
   end
 
-  def generate_csv
+  def export_csv
     CSV.generate(headers: true) do |csv|
       csv << header
       search.each do |investment|
         csv << [
           investment.project.name,
           investment.user.name,
-          investment.price.to_s(:currency),
-          I18n.l(investment.created_at, format: :long)
+          investment.price.to_s(:currency)
         ]
       end
     end
@@ -47,7 +46,6 @@ class InvestmentsReporter
       Project.human_attribute_name(:name),
       User.human_attribute_name(:name),
       Investment.human_attribute_name(:price),
-      Investment.human_attribute_name(:created_at)
     ]
   end
 end
