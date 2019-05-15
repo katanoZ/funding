@@ -20,5 +20,7 @@ module Funding
                        routing_specs: false,
                        request_specs: false
     end
+
+    config.paths.add 'lib/utils', eager_load: true
   end
 end

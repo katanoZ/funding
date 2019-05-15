@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'csv'
-
 class InvestmentsReporter
   FILEMAME = 'investments_report'
 
@@ -21,16 +19,7 @@ class InvestmentsReporter
   end
 
   def export_csv
-    CSV.generate(headers: true) do |csv|
-      csv << header
-      search.each do |investment|
-        csv << [
-          investment.project.name,
-          investment.user.name,
-          investment.price.to_s(:currency)
-        ]
-      end
-    end
+    CsvUtil.generate_csv(search, column_names, header)
   end
 
   def filename
@@ -41,11 +30,15 @@ class InvestmentsReporter
 
   attr_reader :user
 
+  def column_names
+    %w[project_name user_name price]
+  end
+
   def header
     [
       Project.human_attribute_name(:name),
       User.human_attribute_name(:name),
-      Investment.human_attribute_name(:price),
+      Investment.human_attribute_name(:price)
     ]
   end
 end
