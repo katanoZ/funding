@@ -7,7 +7,7 @@ class Admin::InvestmentsController < ApplicationController
   end
 
   def generate_report
-    @investments = @reporter.search if @reporter.valid?
+    @investments = @reporter.investments if @reporter.valid?
     render :report
   end
 

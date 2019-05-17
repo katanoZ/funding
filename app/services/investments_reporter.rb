@@ -11,7 +11,7 @@ class InvestmentsReporter
     @user = user
   end
 
-  def search
+  def investments
     Investment.for_projects_created_by(user)
               .created_within(range)
               .includes(:project, :user)
@@ -19,7 +19,7 @@ class InvestmentsReporter
   end
 
   def export_csv
-    CsvUtil.generate_csv(search, column_names, header)
+    CsvUtil.generate_csv(investments, column_names, header)
   end
 
   def filename
