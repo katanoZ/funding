@@ -1,0 +1,25 @@
+h1 投資状況レポート
+p 自分が作成したプロジェクトの投資状況を一覧で表示します
+
+= render 'form', form: @reporter.form
+
+table
+  thead
+    tr
+      th = Project.human_attribute_name(:name)
+      th = User.human_attribute_name(:name)
+      th = Investment.human_attribute_name(:price)
+      th = Investment.human_attribute_name(:created_at)
+
+  - if @investments.present?
+    tbody
+      - @investments.each do |investment|
+        tr
+          td = investment.project.name
+          td = investment.user.name
+          td = investment.price.to_s(:currency)
+          td = l investment.created_at, format: :long
+
+- if @investments.present?
+  = link_to 'CSV出力', admin_investments_generate_csv_report_path(report: @reporter.params, format: :csv)
+

@@ -5,6 +5,8 @@ ja:
       project: プロジェクト
       category: カテゴリ
     attributes:
+      user:
+        name: ユーザ名
       project:
         name: プロジェクト名
         description: 説明
@@ -12,12 +14,20 @@ ja:
         investments_amount: 投資金額合計
       investment:
         price: 投資金額
+        created_at: 投資日時
       category:
         name: カテゴリ名
       project_category:
         category_id: カテゴリ
       project/project_categories:
         category: カテゴリ
+
+  # フォームクラス
+  activemodel:
+    attributes:
+      investments_report_form:
+        start_date: 開始日
+        end_date: 終了日
 
   # 全モデル共通
   attributes:

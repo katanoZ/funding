@@ -1,0 +1,12 @@
+- if form.errors.present?
+  ul
+    - form.errors.full_messages.each do |message|
+      li = message
+
+= form_with model: form, url: admin_investments_generate_report_path, scope: :report, method: :get, local: true do |f|
+  = f.label :start_date
+  = f.date_field :start_date, type: 'date', min: Date.today.prev_year , max: Date.today
+  = f.label :end_date
+  = f.date_field :end_date, type: 'date', min: Date.today.prev_year , max: Date.today
+  br
+  = f.submit '出力'
